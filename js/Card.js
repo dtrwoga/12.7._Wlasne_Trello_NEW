@@ -7,22 +7,22 @@
 		this.$element = createCard(); //
 
 		function createCard() {
-		
+
 		// tworzenie elementów, z których będzie składała się karta
 
 			var card = $('<li class="card" id="'+ self.id +'"></li>');
 			var $cardDescription = $('<p>').addClass('card-description').text(self.name);
-			var $cardDelete = $('<button>').addClass('btn-delete btn-delete-task').html('<i class="fa fa-trash-o"></i>');			
-			
+			var $cardDelete = $('<button>').addClass('btn-delete btn-delete-task').html('<i class="fa fa-trash-o"></i>');
+
 
 		// Podpinanie zdarzeń
 
-			ard.append(cardDeleteBtn);
-			cardDescription.text(self.name);
-			card.append(cardDescription)
-			
+			card.append($cardDelete);
+			$cardDescription.text(self.name);
+			card.append($cardDescription)
+
 			return card;
-		
+
 		}//koniec funkcji createCard
 
   	}//koniec funkcji Card
@@ -39,5 +39,3 @@
     });
 }
 	}
-
-  	

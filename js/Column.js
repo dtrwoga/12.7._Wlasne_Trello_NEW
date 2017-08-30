@@ -3,11 +3,11 @@
 function Column(id, name) {
     var self = this; // useful for nested functions
 	this.id = id;
-    this.name = name || 'No name given';    
+    this.name = name || 'No name given';
 	this.$element = createColumn();
 
     function createColumn() {
-    	
+
     // tworzenie elementów, z których będzie składała się kolumna
 		var $column = $('<div>').addClass('column');//tworzymy $element.$column
 		var $columnTitle = $('<h2>').addClass('column-title').text(self.name);//tworzymy tytuł kolumny, który znajduje się we właściwości name (Dostaniemy się do niej przez zmienną self)
@@ -18,7 +18,7 @@ function Column(id, name) {
 	// Podpinanie zdarzeń
 
 		$columnDelete.click(function() {
-    		self.removeColumn();
+    		self.deleteColumn();
 		});
 
 	//Add a note after clicking on the button:
@@ -31,7 +31,7 @@ function Column(id, name) {
 		        method: 'POST',
 		        data: {
 		            name: cardName,
-    				bootcamp_kanban_column_id: self.id 
+    				bootcamp_kanban_column_id: self.id
 		        },
         		success: function(response) {
 	            	var card = new Card(response.id, cardName);
@@ -39,17 +39,17 @@ function Column(id, name) {
         		}
     		});
 		});
-			
+
 		$column.append($columnTitle)
 			.append($columnDelete)
 			.append($columnAddCard)
 			.append($columnCardList);
 			return $column;
-	}	
+	}
 }
 Column.prototype = {
 	createCard: function(card) {
-	  	this.element.children('ul').append(card.element);
+	  	this.$element.children('ul').append(card.$element);
 	},
 	deleteColumn: function() {
 	  	var self = this;
@@ -57,7 +57,7 @@ Column.prototype = {
 	      	url: baseUrl + '/column/' + self.id,
 	     	method: 'DELETE',
 	      	success: function(response){
-	        	self.element.remove();
+	        	self.$element.remove();
       		}
     	});
 	}

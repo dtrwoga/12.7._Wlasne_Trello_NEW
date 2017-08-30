@@ -3,11 +3,10 @@
     	addColumn: function(column) {
     		this.$element.append(column.$element);
     		initSortable();
-    		initSortableColumn();
     	},
     	$element: $('#board .column-container')
 	};
-	
+
  $('.create-column').click(function() {
         var columnName = prompt('Enter a column name');
         $.ajax({
@@ -18,15 +17,14 @@
     		},
     		success: function(response){
     			var column = new Column(response.id, columnName);
-    			board.createColumn(column);
+    			board.addColumn(column);
           	}
         });
 });
 
 function initSortable() {
-    $('.card-list').sortable({
-      connectWith: '.card-list',
+    $('.column-card-list').sortable({
+      connectWith: '.column-card-list',
       placeholder: 'card-placeholder'
     }).disableSelection();
 }
-
